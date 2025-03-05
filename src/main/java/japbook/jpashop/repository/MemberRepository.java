@@ -3,18 +3,19 @@ package japbook.jpashop.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import japbook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em; // 스프링 데이터 jpa가 Persistencecontext 말고 Autowired만 붙여도 되도록 지원
 
     public void save(Member member){
-        em.persist(member);
+        em.persist(member); // 영속성 컨텍스트에 member 객체를 올림, id값이 영속성 컨텍스트의 key가 됨. db에 들어가지 않아도 생성...
     }
 
     public Member findOne(Long id){
