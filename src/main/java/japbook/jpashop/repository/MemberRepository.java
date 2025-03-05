@@ -15,7 +15,9 @@ public class MemberRepository {
     private final EntityManager em; // 스프링 데이터 jpa가 Persistencecontext 말고 Autowired만 붙여도 되도록 지원
 
     public void save(Member member){
-        em.persist(member); // 영속성 컨텍스트에 member 객체를 올림, id값이 영속성 컨텍스트의 key가 됨. db에 들어가지 않아도 생성...
+        em.persist(member);
+        // 영속성 컨텍스트에 member 객체를 올림, id값이 영속성 컨텍스트의 key가 됨. db에 들어가지 않아도 생성...
+        //persist한다고 바로 테이블에 insert 쿼리가 날라가는 것이 아님. 데이터 트랜잭션이 커밋될 때 플러시가 되면서 insert 쿼리가 나감.
     }
 
     public Member findOne(Long id){
