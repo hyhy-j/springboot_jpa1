@@ -22,11 +22,14 @@ public class ItemService {
     }
 
     @Transactional
-    public void updateItem(Long itemId, Book param) {
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
         Item findItem = itemRepository.findOne(itemId); // 영속성 엔티티, 트랜잭션이 커밋될 경우 플러시하며 쿼리 날라감.
-        findItem.setPrice(param.getPrice());
+        /*findItem.setPrice(param.getPrice());
         findItem.setName(param.getName());
-        findItem.setStockQuantity(param.getStockQuantity());
+        findItem.setStockQuantity(param.getStockQuantity()); // 변경 감지 시에도 하나의 의미있는 메서드를 만드는 것이 좋다. change..*/
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
     }
 
     public List<Item> findItems(){
